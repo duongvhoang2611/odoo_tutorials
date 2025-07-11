@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Window action -->
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">Property Type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first estate property type!
+            </p>
+            <p>
+                Click the "New" button to add a property type to your real estate.
+            </p>
+        </field>
+    </record>
+
+    <record id="estate_property_type_view_list" model="ir.ui.view">
+        <field name="name">estate.property.type.list</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <list string="Property Types">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="estate_property_type_view_form" model="ir.ui.view">
+        <field name="name">estate.property.type.form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="Property Types">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="action"
+                        name="%(estate_property_offer_action)d" icon="fa-envelope">
+                        <field name="offer_count" widget="statinfo" string="Offers" />
+                    </button>
+                </div>
+                <div class="oe_title">
+                    <h1>
+                        <field nolabel="1" name="name" />
+                    </h1>
+                </div>
+
+                <notebook>
+                    <page name="properties" string="Properties.">
+                        <field name="property_ids" nolabel="1">
+                            <list>
+                                <field name="name" />
+                                <field name="expected_price" />
+                                <field name="state" />
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+</odoo>
