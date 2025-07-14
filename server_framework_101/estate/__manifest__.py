@@ -16,6 +16,7 @@
         'views/estate_property_views.xml',
         'views/res_user_views.xml',
         'views/estate_menus.xml',
+        'security/res_groups.xml',
     ],
     'demo': ['demo/demo_data.xml'],
     'auto_install': False,
