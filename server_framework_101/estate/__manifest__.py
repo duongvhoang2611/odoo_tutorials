@@ -17,7 +17,7 @@
         'views/res_user_views.xml',
         'views/estate_menus.xml',
     ],
-    'demo': [],
+    'demo': ['demo/demo_data.xml'],
     'auto_install': False,
     'application': True,
 }
