@@ -3,7 +3,7 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.todo_item">
-        <div>
+        <div t-att-class="props.todo.done ? 'text-muted text-decoration-line-through' : ''">
             <t t-esc="props.todo.id"/>.
             <t t-esc="props.todo.title"/>
         </div>
