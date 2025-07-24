@@ -8,5 +8,10 @@ export class TodoItem extends Component {
       type: Object,
       shape: { id: Number, title: String, done: Boolean },
     },
+    toggleState: { type: Function },
   };
+
+  onChange() {
+    this.props.toggleState(this.props.todo.id);
+  }
 }
