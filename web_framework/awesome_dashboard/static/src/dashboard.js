@@ -19,7 +19,7 @@ class AwesomeDashboard extends Component {
     };
 
     onWillStart(async () => {
-      this.statistics = this.statistics.loadStatistics();
+      this.statistics = await this.statistics.loadStatistics();
     });
   }
 
