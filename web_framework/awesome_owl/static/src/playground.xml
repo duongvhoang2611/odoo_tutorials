@@ -8,9 +8,14 @@
             <Counter onChange.bind="incrementSum"/>
             <div>The sum is: <t t-esc="sum.value"/></div>
         </div>
+
         <div>
-            <Card title="'Card 1'" content="string1"></Card>
-            <Card title="'Card 2'" content="string2"></Card>
+            <Card title="'Card 1'">
+                Content of card 1
+            </Card>
+            <Card title="'Card 2'">
+                <Counter />
+            </Card>
         </div>
 
         <TodoList />
