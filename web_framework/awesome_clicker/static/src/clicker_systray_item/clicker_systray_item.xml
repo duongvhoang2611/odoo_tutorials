@@ -4,12 +4,12 @@
 
     <t t-name="awesome_clicker.clicker_systray">
         <div class="o_nav_entry">
-            Clicks: <t t-esc="state.counter"/>
-            <button class="btn btn-secondary" t-on-click="increment">
+            Clicks: <t t-esc="clickService.state.counter" />
+            <button class="btn btn-secondary" t-on-click="() => this.clickService.increment(9)">
                 <i class="fa fa-lg fa-plus"></i>
             </button>
 
-            <button class="btn btn-secondary" t-on-click="openClientAction">
+            <button class="btn btn-secondary ms-1" t-on-click="openClientAction">
                 Open
             </button>
         </div>
