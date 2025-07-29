@@ -4,7 +4,7 @@
 
     <t t-name="awesome_clicker.clicker_systray">
         <div class="o_nav_entry">
-            Clicks: <t t-esc="this.clicker.state.counter" />
+            Clicks: <ClickerValue/>
             <button class="btn btn-secondary" t-on-click="() => this.clicker.increment(9)">
                 <i class="fa fa-lg fa-plus"></i>
             </button>
