@@ -16,7 +16,7 @@
                     <t t-foreach="clicker.bots" t-as="bot" t-key="bot">
                         <div t-if="bot_value.level lte clicker.level" class="card me-3">
                             <div class="card-header">
-                                <t t-esc="bot_value.purchased" />x <t t-esc="bot"/> (<t t-esc="bot_value.increment"/> clicks/10seconds)
+                                <t t-esc="bot_value.purchased" />x <t t-esc="bot"/> (<t t-esc="bot_value.increment * clicker.multipliers"/> clicks/10seconds)
                                 <i class="fa fa-android"></i>
                             </div>
                             <div class="card-body">
@@ -30,6 +30,23 @@
                             </div>
                         </div>
                     </t>
+                </div>
+            </div>
+            <div t-if="clicker.level >= 3" class="ms-1 mt-1">
+                <h2>Power Multiplier</h2>
+                <div class="d-flex flex-row">
+                    <div class="card me-3">
+                        <div class="card-header">
+                            <t t-esc="clicker.multipliers" />x <i class="fa fa-superpowers"></i>
+                        </div>
+                        <div class="card-body">
+                            <button t-on-click="() => clicker.buyMultiplier()"
+                                class="btn btn-primary"
+                                t-att-disabled="clicker.counter lt 50000">
+                                Buy Power Multiplier (50000 clicks)
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
