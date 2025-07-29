@@ -1,4 +1,4 @@
-import { useService } from "@web/core/utils/hooks";
-import { useState } from "@odoo/owl";
+import { useService } from '@web/core/utils/hooks'
+import { useState } from '@odoo/owl'
 
-export const useClicker = () => useState(useService("awesome_clicker.clicker"));
+export const useClicker = () => useState(useService('awesome_clicker.clicker'))

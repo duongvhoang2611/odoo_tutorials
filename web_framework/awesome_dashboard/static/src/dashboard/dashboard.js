@@ -1,32 +1,32 @@
 /** @odoo-module **/
 
-import { Component, useState } from "@odoo/owl";
-import { registry } from "@web/core/registry";
-import { Layout } from "@web/search/layout";
-import { useService } from "@web/core/utils/hooks";
-import { DashboardItem } from "./dashboard_item/dashboard_item";
-import { Dialog } from "@web/core/dialog/dialog";
-import { CheckBox } from "@web/core/checkbox/checkbox";
-import { browser } from "@web/core/browser/browser";
+import { Component, useState } from '@odoo/owl'
+import { registry } from '@web/core/registry'
+import { Layout } from '@web/search/layout'
+import { useService } from '@web/core/utils/hooks'
+import { DashboardItem } from './dashboard_item/dashboard_item'
+import { Dialog } from '@web/core/dialog/dialog'
+import { CheckBox } from '@web/core/checkbox/checkbox'
+import { browser } from '@web/core/browser/browser'
 
 class AwesomeDashboard extends Component {
-  static template = "awesome_dashboard.AwesomeDashboard";
+  static template = 'awesome_dashboard.AwesomeDashboard'
 
-  static components = { Layout, DashboardItem };
+  static components = { Layout, DashboardItem }
 
   setup() {
-    this.action = useService("action");
-    this.statistics = useState(useService("awesome_dashboard.statistics"));
-    this.dialog = useService("dialog");
+    this.action = useService('action')
+    this.statistics = useState(useService('awesome_dashboard.statistics'))
+    this.dialog = useService('dialog')
     this.display = {
       controlPanel: {},
-    };
-    this.items = registry.category("awesome_dashboard").getAll();
+    }
+    this.items = registry.category('awesome_dashboard').getAll()
     this.state = useState({
       disabledItems:
-        browser.localStorage.getItem("disabledDashboardItems")?.split(",") ||
+        browser.localStorage.getItem('disabledDashboardItems')?.split(',') ||
         [],
-    });
+    })
   }
 
   openConfiguration() {
@@ -34,36 +34,36 @@ class AwesomeDashboard extends Component {
       items: this.items,
       disabledItems: this.state.disabledItems,
       onUpdateConfiguration: this.updateConfiguration.bind(this),
-    });
+    })
   }
 
   updateConfiguration(newDisabledItems) {
-    this.state.disabledItems = newDisabledItems;
+    this.state.disabledItems = newDisabledItems
   }
 
   openCustomerView() {
-    this.action.doAction("base.action_partner_form");
+    this.action.doAction('base.action_partner_form')
   }
 
   openLeads() {
     this.action.doAction({
-      type: "ir.actions.act_window",
-      name: "All Leads",
-      res_model: "crm.lead",
+      type: 'ir.actions.act_window',
+      name: 'All Leads',
+      res_model: 'crm.lead',
       views: [
-        [false, "list"],
-        [false, "form"],
+        [false, 'list'],
+        [false, 'form'],
       ],
-    });
+    })
   }
 }
 
 class ConfigurationDialog extends Component {
-  static template = "awesome_dashboard.configuration_dialog";
+  static template = 'awesome_dashboard.configuration_dialog'
 
-  static components = { Dialog, CheckBox };
+  static components = { Dialog, CheckBox }
 
-  static props = ["close", "items", "disabledItems", "onUpdateConfiguration"];
+  static props = ['close', 'items', 'disabledItems', 'onUpdateConfiguration']
 
   setup() {
     this.items = useState(
@@ -71,23 +71,23 @@ class ConfigurationDialog extends Component {
         ...item,
         enabled: !this.props.disabledItems.includes(item.id),
       }))
-    );
+    )
   }
 
   done() {
-    this.props.close();
+    this.props.close()
   }
 
   onChange(checked, changedItem) {
-    changedItem.enabled = checked;
+    changedItem.enabled = checked
     const newDisabledItems = Object.values(this.items)
       .filter((item) => !item.enabled)
-      .map((item) => item.id);
+      .map((item) => item.id)
 
-    browser.localStorage.setItem("disabledDashboardItems", newDisabledItems);
+    browser.localStorage.setItem('disabledDashboardItems', newDisabledItems)
 
-    this.props.onUpdateConfiguration(newDisabledItems);
+    this.props.onUpdateConfiguration(newDisabledItems)
   }
 }
 
-registry.category("lazy_components").add("AwesomeDashboard", AwesomeDashboard);
+registry.category('lazy_components').add('AwesomeDashboard', AwesomeDashboard)
