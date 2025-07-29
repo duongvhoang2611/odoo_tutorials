@@ -2,7 +2,7 @@
 
 <templates xml:space="preserve">
     <t t-name="awesome_clicker.clicker_value">
-        <span t-att-data-tooltip="clicker.state.counter">
+        <span t-att-data-tooltip="clicker.counter">
             <t t-esc="humanizedClicks" />
         </span>
     </t>
