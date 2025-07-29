@@ -7,12 +7,27 @@ export class ClickerModel extends Reactive {
 
     this.counter = 0
     this.level = 0
-    this.clickBots = 0
+    this.bots = {
+      clickBot: {
+        cost: 1000,
+        level: 1,
+        increment: 10,
+        purchased: 0,
+      },
+      bigBot: {
+        cost: 5000,
+        level: 2,
+        increment: 100,
+        purchased: 0,
+      },
+    }
 
     document.addEventListener('click', () => this.increment(1), true)
 
     setInterval(() => {
-      this.counter += this.clickBots * 10
+      for (const bot in this.bots) {
+        this.counter += this.bots[bot].increment * this.bots[bot].purchased
+      }
     }, 10 * 1000)
 
     this.bus = new EventBus()
@@ -20,19 +35,35 @@ export class ClickerModel extends Reactive {
 
   increment(inc) {
     this.counter += inc
-    if (this.level < 1 && this.counter >= 1000) {
-      this.bus.trigger('MILESTONE_1k')
-      this.level++
+
+    if (
+      this.milestone[this.level] &&
+      this.counter >= this.milestone[this.level].counter
+    ) {
+      this.bus.trigger('MILESTONE', this.milestone[this.level])
+      this.level += 1
     }
   }
 
-  buyClickBot() {
-    const clickBotCost = 1000
-    if (this.counter < clickBotCost) {
+  buyBot(name) {
+    if (!Object.keys(this.bots).includes(name)) {
+      throw new Error(`Unknown bot ${name}`)
+    }
+
+    const costBot = this.bots[name].cost
+
+    if (this.counter < costBot) {
       return false
     }
 
-    this.counter -= clickBotCost
-    this.clickBots += 1
+    this.counter -= costBot
+    this.bots[name].purchased += 1
+  }
+
+  get milestone() {
+    return [
+      { counter: 1000, unlock: 'clickBot' },
+      { counter: 5000, unlock: 'bigBot' },
+    ]
   }
 }

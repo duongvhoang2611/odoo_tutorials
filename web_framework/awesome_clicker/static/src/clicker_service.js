@@ -6,9 +6,9 @@ const clickerService = {
   start(env, services) {
     const clickerModel = new ClickerModel()
     const bus = clickerModel.bus
-    bus.addEventListener('MILESTONE_1k', () => {
+    bus.addEventListener('MILESTONE', (e) => {
       services.effect.add({
-        message: 'Milestone reached! You can now buy clickbots',
+        message: `Milestone reached! You can now buy ${e.detail.unlock}`,
         type: 'rainbow_man',
       })
     })
