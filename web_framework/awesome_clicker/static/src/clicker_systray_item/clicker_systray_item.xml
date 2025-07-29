@@ -4,14 +4,14 @@
 
     <t t-name="awesome_clicker.clicker_systray">
         <div class="o_nav_entry">
-            Clicks: <ClickerValue/>
-            <button class="btn btn-secondary" t-on-click="() => this.clicker.increment(9)">
-                <i class="fa fa-lg fa-plus"></i>
-            </button>
-
-            <button class="btn btn-secondary ms-1" t-on-click="openClientAction">
-                Open
-            </button>
+                <span>Clicks: <ClickerValue /></span>
+                <button class="btn btn-secondary ms-1"
+                    t-on-click="() => this.clicker.increment(9)">
+                    <i class="fa fa-lg fa-plus"></i>
+                </button>
+                <button class="btn btn-secondary ms-1" t-on-click="openClientAction">
+                    Open
+                </button>
         </div>
     </t>
 
