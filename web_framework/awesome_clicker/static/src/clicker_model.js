@@ -23,6 +23,24 @@ export class ClickerModel extends Reactive {
         purchased: 0,
       },
     }
+    this.trees = {
+      pear: {
+        cost: 1_000_000,
+        level: 4,
+        produce: 'pear',
+        purchased: 0,
+      },
+      cherry: {
+        cost: 1_000_000,
+        level: 4,
+        produce: 'cherry',
+        purchased: 0,
+      },
+    }
+    this.fruits = {
+      pear: 0,
+      cherry: 0,
+    }
     this.multipliers = 1
 
     document.addEventListener('click', () => this.increment(1), true)
@@ -33,6 +51,12 @@ export class ClickerModel extends Reactive {
           this.bots[bot].increment * this.bots[bot].purchased * this.multipliers
       }
     }, 10 * 1000)
+
+    setInterval(() => {
+      for (const tree in this.trees) {
+        this.fruits[this.trees[tree].produce] += this.trees[tree].purchased
+      }
+    }, 30 * 1000)
 
     this.bus = new EventBus()
   }
@@ -45,6 +69,17 @@ export class ClickerModel extends Reactive {
 
     this.counter -= cost
     this.multipliers++
+  }
+
+  buyTree(name) {
+    if (!Object.keys(this.trees).includes(name)) {
+      throw new Error(`Invalid tree name ${name}`)
+    }
+    if (this.counter < this.trees[name].cost) {
+      return false
+    }
+    this.counter -= this.trees[name].cost
+    this.trees[name].purchased += 1
   }
 
   increment(inc) {
@@ -76,9 +111,10 @@ export class ClickerModel extends Reactive {
 
   get milestone() {
     return [
-      { counter: 1000, unlock: 'clickBot' },
-      { counter: 5000, unlock: 'bigBot' },
-      { counter: 100000, unlock: 'power multiplier' },
+      { counter: 1_000, unlock: 'clickBot' },
+      { counter: 5_000, unlock: 'bigBot' },
+      { counter: 100_000, unlock: 'power multiplier' },
+      { counter: 1_000_000, unlock: 'power multiplier' },
     ]
   }
 

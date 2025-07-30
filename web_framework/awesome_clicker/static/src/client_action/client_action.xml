@@ -6,7 +6,7 @@
         <div style="padding: 16px;">
             <div>
                 <span>Clicks: <ClickerValue /></span>
-                <button type="button" class="btn btn-secondary o-default-button ms-1" t-on-click="() => this.clicker.increment(9)">
+                <button type="button" class="btn btn-secondary o-default-button ms-1" t-on-click="() => clicker.increment(9)">
                     Increment
                 </button>
             </div>
@@ -47,6 +47,36 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div t-if="clicker.level >= 4" class="ms-1 mt-1">
+                <h2> Trees </h2>
+                <div class="d-flex flex-row">
+                    <t t-foreach="clicker.trees" t-as="tree" t-key="tree">
+                        <div t-if="tree_value.level lte clicker.level" class="card me-3">
+                            <div class="card-header">
+                                <t t-esc="tree_value.purchased" />x <t t-esc="tree" /> (1x <t
+                                    t-esc="tree_value.produce" /> /30seconds) <i class="fa fa-tree"></i>
+                            </div>
+                            <div class="card-body">
+                                <button t-on-click="() => clicker.buyTree(tree)"
+                                    class="btn btn-primary"
+                                    t-att-disabled="clicker.counter lt tree_value.cost"> Buy <t
+                                        t-esc="tree" /> (<t t-esc="tree_value.cost" /> clicks) </button>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <h2> Fruits </h2>
+                <div class="d-flex flex-row">
+                    <t t-foreach="clicker.fruits" t-as="fruit" t-key="fruit">
+                        <div class="card me-3">
+                            <div class="card-header">
+                                <t t-esc="fruit_value" />x <t t-esc="fruit" />
+                            </div>
+                        </div>
+                    </t>
                 </div>
             </div>
         </div>
