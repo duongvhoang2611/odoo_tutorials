@@ -114,7 +114,7 @@ export class ClickerModel extends Reactive {
       { counter: 1_000, unlock: 'clickBot' },
       { counter: 5_000, unlock: 'bigBot' },
       { counter: 100_000, unlock: 'power multiplier' },
-      { counter: 1_000_000, unlock: 'power multiplier' },
+      { counter: 1_000_000, unlock: 'pear tree & cherry tree' },
     ]
   }
 
