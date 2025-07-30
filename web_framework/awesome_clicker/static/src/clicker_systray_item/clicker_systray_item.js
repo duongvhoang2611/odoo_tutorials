@@ -3,6 +3,8 @@ import { registry } from '@web/core/registry'
 import { useService } from '@web/core/utils/hooks'
 import { useClicker } from '../clicker_hook'
 import { ClickerValue } from '../clicker_value/clicker_value'
+import { Dropdown } from '@web/core/dropdown/dropdown'
+import { DropdownItem } from '@web/core/dropdown/dropdown_item'
 
 export class ClickerSystray extends Component {
   static template = 'awesome_clicker.clicker_systray'
@@ -10,6 +12,8 @@ export class ClickerSystray extends Component {
 
   static components = {
     ClickerValue,
+    Dropdown,
+    DropdownItem,
   }
 
   setup() {
@@ -24,6 +28,22 @@ export class ClickerSystray extends Component {
       target: 'new',
       name: 'Clicker Game',
     })
+  }
+
+  get totalTrees() {
+    const initialValue = 0
+    return Object.values(this.clicker.trees).reduce(
+      (sum, tree) => sum + tree.purchased,
+      initialValue
+    )
+  }
+
+  get totalFruits() {
+    const initValue = 0
+    return Object.values(this.clicker.fruits).reduce(
+      (sum, value) => sum + value,
+      initValue
+    )
   }
 }
 
