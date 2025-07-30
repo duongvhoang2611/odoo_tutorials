@@ -91,6 +91,8 @@ export class ClickerModel extends Reactive {
         }
       }
     }
-    return choose(availableRewards)
+    const reward = choose(availableRewards)
+    this.bus.trigger('REWARD', reward)
+    return reward
   }
 }
