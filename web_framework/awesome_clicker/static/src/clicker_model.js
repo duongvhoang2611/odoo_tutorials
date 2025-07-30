@@ -61,6 +61,18 @@ export class ClickerModel extends Reactive {
     this.bus = new EventBus()
   }
 
+  toJSON() {
+    const json = { ...this }
+    delete json['bus']
+    return json
+  }
+
+  static fromJSON(json) {
+    const clickerModel = new ClickerModel()
+    const clickerInstance = Object.assign(clickerModel, json)
+    return clickerInstance
+  }
+
   buyMultiplier() {
     const cost = 50000
     if (this.counter < cost) {
