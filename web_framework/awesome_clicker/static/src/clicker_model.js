@@ -38,10 +38,17 @@ export class ClickerModel extends Reactive {
         produce: 'cherry',
         purchased: 0,
       },
+      peach: {
+        cost: 1_500_000,
+        level: 4,
+        produce: 'peach',
+        purchased: 0,
+      },
     }
     this.fruits = {
       pear: 0,
       cherry: 0,
+      peach: 0,
     }
     this.multipliers = 1
 
