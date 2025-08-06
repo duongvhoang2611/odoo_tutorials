@@ -17,9 +17,13 @@
         "views/res_user_views.xml",
         "views/estate_menus.xml",
         "security/res_groups.xml",
-        "data/property_types.xml",
+        "data/property_type_data.xml",
     ],
-    "demo": ["demo/demo_data.xml"],
+    "demo": [
+        "demo/property_type_demo.xml",
+        "demo/property_demo.xml",
+        "demo/property_offer_demo.xml",
+    ],
     "auto_install": False,
     "application": True,
 }

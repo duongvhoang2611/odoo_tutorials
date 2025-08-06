@@ -13,5 +13,8 @@
         <record id="land_property_type" model="estate.property.type">
             <field name="name">Land</field>
         </record>
+        <!-- <record id="estate.property_type_data_5" model="estate.property.type">
+            <field name="name">Single-Family House</field>
+        </record> -->
     </data>
 </odoo>
